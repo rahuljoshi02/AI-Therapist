@@ -3,11 +3,13 @@ import { AudioWaveform } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle"
 import { SignInButton } from "./auth/sign-in-button";
 
+
 export default function Header() {
     const navItems = [
         { href: "/features", label: "Features" },
         { href: "/about", label: "About Aura" },
     ];
+
 
     return (
     <div className="w-full fixed top-0 z-50 bg-background/95 backdrop-blur">
