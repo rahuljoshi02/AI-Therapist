@@ -16,6 +16,17 @@ import { Brain, Trophy, Heart, Activity, Sparkles, ArrowRight, MessageSquare } f
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+
+import { AnxietyGames } from "@/components/games/anxiety-games";
+
 interface DailyStats {
     moodScore: number | null;
     completionRate: number;
@@ -26,6 +37,8 @@ interface DailyStats {
 
 export default function DashboardPage() {
     const [currentTime, setCurrentTime] = useState(new Date())
+    const [showMoodModal, setShowMoodModal] = useState(false)
+    
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
         return () => clearInterval(timer);
@@ -182,9 +195,27 @@ export default function DashboardPage() {
                         </Card>
                     </div>
 
-                    
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-3 space-y-6">
+                            <AnxietyGames />
+                        </div>
+                    </div>
                 </div>
             </Container>
+
+            { /* mood tracking modal */ }
+            <Dialog open={showMoodModal} onOpenChange={setShowMoodModal}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>
+                            How are you feeling?
+                        </DialogTitle>
+                        <DialogDescription>
+                            Move the slider to track your current mood
+                        </DialogDescription>
+                    </DialogHeader>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
