@@ -46,16 +46,11 @@ const games = [
         bgColor: "bg-green-500/10",
         duration: "15 mins",
       },
-      {
-        id: "waves",
-        title: "Ocean Waves",
-        description: "Match your breath with gentle ocean waves",
-        icon: Waves,
-        color: "text-cyan-500",
-        bgColor: "bg-cyan-500/10",
-        duration: "8 mins",
-      },
 ];
+
+import { BreathingGame } from "./breathing-game";
+import { ZenGarden } from "./zen-garden";
+import { ForestGame } from "./forest-game";
 
 interface AnxietyGamesProps {
     onGamePlayed?: (gameName: string, description: 
@@ -85,13 +80,11 @@ export const AnxietyGames = ({ onGamePlayed }: AnxietyGamesProps) => {
     const renderGame = () => {
         switch (selectedGame) {
           case "breathing":
-            // return <BreathingGame />;
+            return <BreathingGame />;
           case "garden":
-            // return <ZenGarden />;
+            return <ZenGarden />;
           case "forest":
-            // return <ForestGame />;
-          case "waves":
-            // return <OceanWaves />;
+            return <ForestGame />;
           default:
             return null;
         }
@@ -113,7 +106,7 @@ export const AnxietyGames = ({ onGamePlayed }: AnxietyGamesProps) => {
 
                 <CardContent>
                     <div className="grid grid-cols-1
-                    md:grid-cols-2 gap-4">
+                    gap-4">
                         {games.map((game) => (
                             <motion.div
                                 key={game.id}
