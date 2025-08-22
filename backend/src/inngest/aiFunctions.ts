@@ -99,6 +99,126 @@ export const processChatMessage = inngest.createFunction(
                     });
                 });
             }
-        } catch (error) {}
+
+            const response = await step.run("generate-response", async () => {
+                try {
+
+                    
+                    const prompt = `${systemPrompt}
+                    
+                    Based on the following context, generate a therapeutic response:
+                    Message: ${message}
+                    Analysis: ${JSON.stringify(analysis)}
+                    Memory: ${JSON.stringify(memory)}
+                    Goals: ${JSON.stringify(goals)}
+                    
+                    Provide a response that:
+                    1. Addresses the immediate emotional needs
+                    2. Uses appropriate therapeutic techniques
+                    3. Shows empathy and understanding
+                    4. Maintains professional boundaries
+                    5. Considers safety and well-being`;
+                    const response = await genAI.models.generateContent({
+                        model: "gemini-2.0-flash",
+                        contents: prompt,
+                    });
+
+                    const results = response.text;
+                    const responseText = results?.trim();
+                    logger.info("Generated response:", { responseText });
+
+                    return responseText;
+                } catch (error) {
+                    logger.error("Error generating response:", { error, message });
+                    return "I'm here to support you. Could you tell me more about what's on your mind?";
+                }
+
+            });
+            return {
+                response,
+                analysis,
+                updatedMemory,
+            };
+
+        } catch (error) {
+            logger.error("Error in chat message processing:", {
+                error,
+                message: event.data.message,
+            });
+
+            return {
+                response:
+                  "I'm here to support you. Could you tell me more about what's on your mind?",
+                analysis: {
+                  emotionalState: "neutral",
+                  themes: [],
+                  riskLevel: 0,
+                  recommendedApproach: "supportive",
+                  progressIndicators: [],
+                },
+                updatedMemory: event.data.memory,
+            };
+        }
     }
 );
+
+export const analyzeTherapySession = inngest.createFunction(
+    {
+        id: "analyze-therapy-session",
+    },
+    { event: "therapy/session.created" },
+    async ({event,step}) => {
+        try {
+            const sessionContent = await step.run("get-session-content", async () => {
+                return event.data.notes || event.data.transcript;
+            });
+            const analysis = await step.run("analyze-with-gemini", async () => {
+                const prompt = `Analyze this therapy session and provide insights:
+                Session Content: ${sessionContent}
+
+                Please provide:
+                1. Key Themes and topics discussed
+                2. Emotional state analysis
+                3. Potential areas of concern
+                4. Recommendations for follow-up
+                5. Progress indicators
+                
+                Format the response as a JSON object.`;
+                const response = await genAI.models.generateContent({
+                    model: "gemini-2.0-flash",
+                    contents: prompt,
+                });
+
+                const results = response.text;
+                const responseText = results?.trim();
+
+                return JSON.parse(responseText || "{}");
+            });
+        
+            await step.run("store-analysis", async () => {
+                logger.info("Session analysis stored successfully");
+                return analysis;
+            });
+
+            if (analysis.areasOfConcern?.length > 0) {
+                await step.run("trigger-concern-alert", async () => {
+                  logger.warn("Concerning indicators detected in session analysis", {
+                    sessionId: event.data.sessionId,
+                    concerns: analysis.areasOfConcern,
+                  });
+                });
+              }
+
+              return {
+                message: "Session analysis completed",
+                analysis,
+              };
+
+        } catch (error) {
+            logger.error("Error in therapy session analysis:", error);
+            throw error;
+        }
+    }
+);
+
+export const functions = [processChatMessage, analyzeTherapySession];
