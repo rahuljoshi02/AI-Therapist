@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface IChatMessage {
     role: "user" | "assistant";
@@ -13,6 +13,9 @@ export interface IChatMessage {
 
 export interface IChatSession extends Document {
     sessionId: string;
+    userId: Types.ObjectId;
+    startTime: Date;
+    status: "active" | "ended";
     messages: IChatMessage[];
     createdAt: Date;
     updatedAt: Date;
@@ -45,6 +48,20 @@ const chatSessionSchema = new Schema<IChatSession>(
             type: String,
             required: true,
             unique: true,
+        },
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        startTime: {
+            type: Date,
+            default: Date.now,
+        },
+        status: {
+            type: String,
+            enum: ["active", "ended"],
+            default: "active",
         },
         messages: [chatMessageSchema],
     },
