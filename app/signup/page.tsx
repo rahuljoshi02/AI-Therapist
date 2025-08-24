@@ -7,13 +7,37 @@ import { Container } from "@/components/ui/container";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Lock, Mail, User } from "lucide-react";
+import { registerUser } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
 
 
 export default function LoginPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async(e: React.FormEvent) => {
+        e.preventDefault();
+        setError("");
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+        setLoading(true);
+        try {
+            await registerUser(name, email, password);
+            router.push("/login");
+        } catch (err: any) {
+            setError(err.message || "Signup failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <div className="min-h-screen w-full
@@ -39,7 +63,7 @@ export default function LoginPage() {
                         </p>
                     </div>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="space-y-3">
                             <div className="flex clex-col md:flex-row gap-4">
                                 <div className="flex-1">
@@ -128,18 +152,23 @@ export default function LoginPage() {
                                 </div>
                             </div>
                         </div>
+                        { error && (
+                            <p className="text-red-500
+                            text-sm text-center">{error}</p>)}
                         <Button className="w-full py-2
                             text-base rounded-xl font-bold
                             bg-gradient-to-r from-primary
                             to-primary/80 shadow-md
                             hover:from-primary/80 hover:to-primary"
                             size="lg"
-                            type="button"
+                            type="submit"
+                            disabled={loading}
                         >
-                            Sign Up
+                            {loading ? "Signing up..." : "Sign up"}
                         </Button>
                     </form>
-                    <div className="my-6 border-t border-primary/10" />
+
+                    <div className="flex items-centermy-6 border-t border-primary/10" />
                         <p className="text-base text-center text-muted-foreground">
                             Already have an account?{" "}
                             <Link

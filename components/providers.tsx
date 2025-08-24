@@ -1,5 +1,6 @@
 'use client';
 
+import { SessionProvider as CustomSessionProvider } from '@/lib/contexts/session-context';
 import { ThemeProvider } from 'next-themes';
 import { useState, useEffect } from 'react';
 
@@ -14,13 +15,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
+      <CustomSessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </CustomSessionProvider>
   );
 }
