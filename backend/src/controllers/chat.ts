@@ -221,6 +221,23 @@ export const getSessionHistory = async (req: Request, res: Response) => {
     }
 };
 
+export const getChatSession = async (req: Request, res: Response) => {
+    try {
+      const { sessionId } = req.params;
+      logger.info(`Getting chat session: ${sessionId}`);
+      const chatSession = await ChatSession.findOne({ sessionId });
+      if (!chatSession) {
+        logger.warn(`Chat session not found: ${sessionId}`);
+        return res.status(404).json({ error: "Chat session not found" });
+      }
+      logger.info(`Found chat session: ${sessionId}`);
+      res.json(chatSession);
+    } catch (error) {
+      logger.error("Failed to get chat session:", error);
+      res.status(500).json({ error: "Failed to get chat session" });
+    }
+  };
+
 export const getChatHistory = async (req: Request, res: Response) => {
     try {
         const { sessionId } = req.params;

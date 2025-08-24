@@ -9,6 +9,9 @@ import authRoutes from "./routes/auth";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import { errorHandler } from "./middleware/errorHandler";
+import chatRouter from "./routes/chat";
+import moodRouter from "./routes/mood";
 
 
 dotenv.config();
@@ -21,17 +24,18 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-const PORT = 3001
 
 app.use(express.json());
 
-app.use("/api/inngest", serve({ client: inngest, functions: inngestFunctions }));
+app.use("/api/inngest",
+        serve({ client: inngest, functions: inngestFunctions })
+    );
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
-});
+app.use("/auth", authRoutes);
+app.use("/chat", chatRouter);
+app.use("/api/mood", moodRouter);
 
-app.use("/auth", authRoutes)
+app.use(errorHandler);
 
 
 const startServer = async () => {
