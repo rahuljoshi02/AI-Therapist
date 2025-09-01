@@ -409,3 +409,19 @@
 {"historyLength":1,"level":"info","message":"Processing chat message: what about my emotional state","timestamp":"2025-09-01T21:44:18.781Z"}
 {"level":"error","message":"Failed to parse analysis JSON:","timestamp":"2025-09-01T21:44:19.609Z"}
 {"level":"info","message":"Session updated successfully:","sessionId":"875d4357-8cff-43a2-99ea-5481b90a7e0f","timestamp":"2025-09-01T21:44:21.746Z"}
+{"level":"info","message":"Processing message: hello","sessionId":"afd58776-dfe7-46bd-9324-c71b05da6f36","timestamp":"2025-09-01T22:37:07.869Z"}
+{"event":{"data":{"goals":[],"history":[],"memory":{"sessionContext":{"conversationThemes":[],"currentTechnique":null},"userProfile":{"emotionalState":[],"preferences":{},"riskLevel":0}},"message":"hello","systemPrompt":"You are an AI therapist assistant. Your role is to:\n1. Provide empathetic and supportive responses\n2. Use evidence-based therapeutic techniques\n3. Maintain professional boundaries\n4. Monitor for risk factors\n5. Guide users toward their therapeutic goals"},"name":"therapy/session.message"},"level":"info","message":"Sending message to Inngest:","timestamp":"2025-09-01T22:37:07.912Z"}
+{"historyLength":0,"level":"info","message":"Processing chat message: hello","timestamp":"2025-09-01T22:37:08.137Z"}
+{"error":{"name":"ApiError","status":400},"level":"error","message":"Error in message analysis: hello","timestamp":"2025-09-01T22:37:08.237Z"}
+{"historyLength":0,"level":"info","message":"Processing chat message: hello","timestamp":"2025-09-01T22:37:08.283Z"}
+{"historyLength":0,"level":"info","message":"Processing chat message: hello","timestamp":"2025-09-01T22:37:08.438Z"}
+{"error":{"name":"ApiError","status":400},"level":"error","message":"Error generating response: hello","timestamp":"2025-09-01T22:37:08.495Z"}
+{"historyLength":0,"level":"info","message":"Processing chat message: hello","timestamp":"2025-09-01T22:37:08.591Z"}
+{"level":"error","message":"Failed to parse analysis JSON:","timestamp":"2025-09-01T22:37:08.959Z"}
+{"level":"info","message":"Session updated successfully:","sessionId":"afd58776-dfe7-46bd-9324-c71b05da6f36","timestamp":"2025-09-01T22:37:09.667Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-09-01T22:43:02.786Z"}
+{"level":"info","message":"server is running on port 3001","timestamp":"2025-09-01T22:43:02.791Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-09-01T22:43:02.792Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-09-01T22:43:19.474Z"}
+{"level":"info","message":"server is running on port 3001","timestamp":"2025-09-01T22:43:19.476Z"}
+{"level":"info","message":"Inngest endpoint available at http://localhost:3001/api/inngest","timestamp":"2025-09-01T22:43:19.477Z"}

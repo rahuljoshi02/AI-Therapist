@@ -44,3 +44,6 @@
 {"error":{"name":"ApiError","status":400},"level":"error","message":"Error in message analysis: what about my emotional state","timestamp":"2025-09-01T21:44:18.437Z"}
 {"error":{"name":"ApiError","status":400},"level":"error","message":"Error generating response: what about my emotional state","timestamp":"2025-09-01T21:44:18.692Z"}
 {"level":"error","message":"Failed to parse analysis JSON:","timestamp":"2025-09-01T21:44:19.609Z"}
+{"error":{"name":"ApiError","status":400},"level":"error","message":"Error in message analysis: hello","timestamp":"2025-09-01T22:37:08.237Z"}
+{"error":{"name":"ApiError","status":400},"level":"error","message":"Error generating response: hello","timestamp":"2025-09-01T22:37:08.495Z"}
+{"level":"error","message":"Failed to parse analysis JSON:","timestamp":"2025-09-01T22:37:08.959Z"}
