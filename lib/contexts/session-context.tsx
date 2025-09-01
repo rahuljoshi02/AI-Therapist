@@ -54,10 +54,12 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         const { password, ...safeUserData } = userData;
         setUser(safeUserData);
         console.log("SessionContext: User state updated:", safeUserData);
+        return;
       } else {
         console.log("SessionContext: Failed to get user data");
         setUser(null);
         localStorage.removeItem("token");
+        return;
       }
     } catch (error) {
       console.error("SessionContext: Error checking session:", error);

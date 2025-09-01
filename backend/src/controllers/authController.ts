@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
     
         res.status(201).json({
             user: {
-                _ud: user._id,
+                _id: user._id,
                 name: user.name,
                 email: user.email,
             },

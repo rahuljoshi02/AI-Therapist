@@ -29,6 +29,7 @@ import {
   } from "@/components/ui/dialog"
 
 import { AnxietyGames } from "@/components/games/anxiety-games";
+import { useSession } from "@/lib/contexts/session-context";
 
 interface DailyStats {
     moodScore: number | null;
@@ -39,8 +40,9 @@ interface DailyStats {
   }
 
 export default function DashboardPage() {
-    const [currentTime, setCurrentTime] = useState(new Date())
-    const [showMoodModal, setShowMoodModal] = useState(false)
+    const [currentTime, setCurrentTime] = useState(new Date());
+    const [showMoodModal, setShowMoodModal] = useState(false);
+    const { user } = useSession();
     
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -101,7 +103,7 @@ export default function DashboardPage() {
             <Container className="pt-20 pb-8 space-y-6">
                 <div className="flex flex-col gap-2">
                     <h1 className="text-3xl font-bold">
-                        Welcome Back!
+                        Welcome Back, {user?.name || ""}!
                     </h1>
                     <p className="text-muted-foreground text-sm">
                         {currentTime.toLocaleDateString("en-US", {

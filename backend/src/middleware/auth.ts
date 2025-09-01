@@ -13,6 +13,7 @@ declare global {
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.header("Authorization")?.replace("Bearer ", "");
+        console.log(token);
 
         if (!token){
             return res.status(401).json({ message: "Authentication required" });
@@ -27,6 +28,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
         if (!user) {
             return res.status(401).json({ message: "User not found" });
         }
+
 
         req.user = user;
         next();

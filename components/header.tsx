@@ -1,14 +1,23 @@
+"use client"
+
 import Link from "next/link"
-import { AudioWaveform } from "lucide-react";
+import { AudioWaveform, MessageCircle } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle"
 import { SignInButton } from "./auth/sign-in-button";
+import { useSession } from "@/lib/contexts/session-context";
+import { Button } from "./ui/button";
+import { LogOut, LogIn } from "lucide-react"
 
 
 export default function Header() {
+    const { isAuthenticated, logout, user } = useSession();
+    console.log("Header: Auth state:", { isAuthenticated, user });
+
     const navItems = [
         { href: "/features", label: "Features" },
         { href: "/about", label: "About Aura" },
     ];
+
 
 
     return (
@@ -54,7 +63,32 @@ export default function Header() {
                     </nav>
                     <div className="flex items-center gap-3">
                         <ThemeToggle />
-                        <SignInButton />
+
+                        {isAuthenticated ? (
+                            <>
+                                <Button
+                                    asChild
+                                    className="hidden md:flex gap-2
+                                    bg-primary/90 hover:bg-primary"
+                                >
+                                        <Link href="/dashboard">
+                                            <MessageCircle className="w-4 h-4 mr-1" />
+                                            Start Chat
+                                        </Link>
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    onClick={logout}
+                                    className="text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                    <LogOut className="w-4 h-4 mr-2" />
+                                    Sign out
+                                </Button>
+                            </>
+                        ) : (
+                            <SignInButton />
+                        )}
+                        
                     </div>
                 </div>
             </div>

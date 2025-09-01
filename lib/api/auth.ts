@@ -8,9 +8,12 @@ export async function registerUser(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
     });
+    const data = await res.json();
     if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message || "Registration failed");
+      throw new Error(data.message || "Registration failed");
+    }
+    if (data.token) {
+      localStorage.setItem("token", data.token);
     }
     return res.json();
   }

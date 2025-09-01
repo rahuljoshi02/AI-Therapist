@@ -1,4 +1,3 @@
-import { auth } from "@/backend/src/middleware/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 const BACKEND_API_URL = process.env.BACKEND_API_URL || "http://localhost:3001";
@@ -26,7 +25,7 @@ export async function POST(req: NextRequest) {
             const error = await response.json();
             console.error("Failed to create chat session:", error);
             return NextResponse.json(
-                { error: error.error || "Failed to create chat session" },
+                { error: error.error || error.message || "Failed to create chat session" },
                 { status: response.status }
             );
         }

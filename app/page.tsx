@@ -6,7 +6,6 @@ import { Waves, ArrowRight } from "lucide-react";
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button";
 
-import Image from "next/image";
 
 export default function Home() {
   const emotions = [
@@ -16,7 +15,6 @@ export default function Home() {
     { value: 75, label: "🤗 Happy", color: "from-yellow-500/50" },
     { value: 100, label: "✨ Excited", color: "from-pink-500/50" },
   ];
-
   const [emotion, setEmotion] = useState(50);
   const [mounted, setMounted] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -132,7 +130,10 @@ export default function Home() {
 
           <Button
             size="lg"
-            onClick={() => setShowDialog(true)}
+            onClick={() => {
+              setShowDialog(true);
+              window.location.href = "http://localhost:3000/dashboard"
+            }}
             className="relative group h-12 px-8 rounded-full bg-gradient-to-r from-primary via-primary/90 to-secondary hover:to-primary shadow-lg shadow-primary/20 transition-all duration-500 hover:shadow-xl hover:shadow-primary/30"
             >
             <span className="relative z-10 font-medium flex items-center gap-2">
