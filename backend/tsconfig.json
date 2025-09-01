@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "commonjs",
+    "moduleResolution": "Node",
     "target": "esnext",
     "strict": true,
+    "outDir": "dist",
     "esModuleInterop": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "declaration": true,
