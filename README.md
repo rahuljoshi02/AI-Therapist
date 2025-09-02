@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 AI Therapist Agent
 
-## Getting Started
+A full-stack AI-powered mental health support platform built with Next.js 14, Node.js, Express, MongoDB, and Google Gemini AI. This project demonstrates how to create an intelligent therapy assistant capable of providing context-aware conversations, mood tracking, crisis detection, and interactive mindfulness activities.
 
-First, run the development server:
+# ✨ Key Features
+  - 🤖 AI Therapy Conversations – Context-aware conversations with emotional intelligence
+  - 🧘 Therapeutic Activities – Breathing exercises, zen garden, forest walks
+  - 📊 Mood Tracking – AI-powered emotional insights & analytics
+  - 🔒 Authentication & Sessions – Secure login & user state persistence with NextAuth.js
+  - 🎨 Modern UI/UX – Responsive dark/light mode, accessibility-first design
+  - 📈 Progress Dashboard – Mental health analytics & activity tracking
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 🛠 Tech Stack
+**Frontend**
+  - Next.js 14 – App router + server components
+  - TypeScript – Type-safe development
+  - Tailwind CSS – Utility-first styling
+  - Framer Motion – Smooth animations
+  - Radix UI – Accessible components
+
+**Backend**
+  - Node.js + Express – REST APIs & server logic
+  - MongoDB – Scalable NoSQL database
+  - NextAuth.js – Authentication & session management
+  - Inngest – Serverless workflow engine for AI & crisis detection
+  - EchoAPI – Prompt testing & API simulation
+
+AI
+  - Google Gemini AI – Conversational AI & therapy prompts
+
+# 🚀 Quick Start
 ```
+# Clone the repository
+git clone https://github.com/rahuljoshi02/AI-Therapist.git
+cd AI-Therapist
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Install dependencies for the full project
+npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run the development server (frontend + backend)
+npm run dev
+```
